@@ -2,8 +2,7 @@ package com.shintadevi.genbe.service;
 
 import java.time.Year;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import javax.transaction.Transactional;
 
@@ -29,28 +28,20 @@ public class PersonServiceImpl implements PersonService{
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(biodata.getTanggalLahir());
 		if(biodata.getPerson().getNik().length() != 16) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("status", false);
-			map.put("message", "Data gagal masuk, jumlah digit nik tidak sama dengan 16");
+
 			return null;}
 		if((Year.now().getValue() - calendar.get(Calendar.YEAR)) < 30) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("status", false);
-			map.put("message", "Data gagal masuk, usia harus diatas 30 tahun");
+
 			return null;}
 		personRepository.save(biodata.getPerson());
 		biodataRepository.save(biodata);
 		return biodata;
 	}
 	
-	
-
 	@Override
 	public Person getDataByNik(String nik) {
 		if(nik.length() != 16) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("status", false);
-			map.put("message", "data gagal masuk, jumlah digit nik tidak sama dengan 16");
+
 			return null;
 		} 
 

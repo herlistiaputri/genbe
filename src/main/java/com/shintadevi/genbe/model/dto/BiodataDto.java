@@ -5,9 +5,6 @@ import java.sql.Date;
 
 import com.shintadevi.genbe.model.entity.Person;
 
-
-
-
 public class BiodataDto {
 	private Integer idBio;
 	private String noHp;

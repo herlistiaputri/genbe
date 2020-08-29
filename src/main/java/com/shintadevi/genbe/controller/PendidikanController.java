@@ -50,7 +50,8 @@ public class PendidikanController {
 		}
 		List<PendidikanDto> pendidikanDtoList = pendidikanList.stream()
 				.map(this::convertToDto).collect(Collectors.toList());
-		return pendidikanDtoList;		
+		return pendidikanDtoList;
+		
 	}
 	
 	private Pendidikan convertToEntity(PendidikanDto dto) {
