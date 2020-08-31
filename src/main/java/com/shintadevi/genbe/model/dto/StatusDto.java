@@ -1,22 +1,19 @@
 package com.shintadevi.genbe.model.dto;
 
 public class StatusDto {
-
 	private String message;
-	private String status;
-	
+	private boolean Status;
 	public String getMessage() {
 		return message;
 	}
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getStatus() {
-		return status;
+	public boolean getStatus() {
+		return Status;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(boolean status) {
+		Status = status;
 	}
-	
 	
 }

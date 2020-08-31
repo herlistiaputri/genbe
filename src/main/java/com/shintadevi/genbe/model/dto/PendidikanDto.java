@@ -1,21 +1,12 @@
 package com.shintadevi.genbe.model.dto;
 
-import com.shintadevi.genbe.model.entity.Person;
 
 public class PendidikanDto {
-	private Integer idPerson;
 	private String jenjang;
 	private String institusi;
 	private String tahunMasuk;
 	private String tahunLulus;
 
-	
-	public Integer getIdPerson() {
-		return idPerson;
-	}
-	public void setIdPerson(Integer idPerson) {
-		this.idPerson = idPerson;
-	}
 	public String getJenjang() {
 		return jenjang;
 	}
@@ -40,6 +31,5 @@ public class PendidikanDto {
 	public void setTahunLulus(String tahunLulus) {
 		this.tahunLulus = tahunLulus;
 	}
-	
 	
 }

@@ -9,91 +9,58 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "t_pendidikan")
 public class Pendidikan {
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY	)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pendidikan")
-	private Integer idPendidikan;
-	@Column(name = "jenjang")
-	private String jenjang;
-	@Column(name = "institusi")
-	private String institusi;
-	@Column(name = "tahunmasuk")
-	private String tahunMasuk;
-	@Column(name = "tahunlulus")
-	private String tahunLulus;
-	
-	
+	private Integer id;
 	@ManyToOne
-	@JoinColumn(name = "idperson")
-	private Person person;
-
-
-	public Integer getIdPendidikan() {
-		return idPendidikan;
+	@JoinColumn(name = "idPerson", nullable = false)
+	private Person idPerson;
+	@Column(name = "jenjang", length = 10, nullable = false)
+	private String jenjang;
+	@Column(name = "institusi", length = 50, nullable = false )
+	private String institusi;
+	@Column(name = "tahunmasuk", length = 10, nullable = false)
+	private String tahunMasuk;
+	@Column(name = "tahunlulus", length = 10, nullable = false)
+	private String tahunLulus;
+	public Integer getId() {
+		return id;
 	}
-
-
-	public void setIdPendidikan(Integer idPendidikan) {
-		this.idPendidikan = idPendidikan;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-
-
+	public Person getIdPerson() {
+		return idPerson;
+	}
+	public void setIdPerson(Person idPerson) {
+		this.idPerson = idPerson;
+	}
 	public String getJenjang() {
 		return jenjang;
 	}
-
-
 	public void setJenjang(String jenjang) {
 		this.jenjang = jenjang;
 	}
-
-
 	public String getInstitusi() {
 		return institusi;
 	}
-
-
 	public void setInstitusi(String institusi) {
 		this.institusi = institusi;
 	}
-
-
 	public String getTahunMasuk() {
 		return tahunMasuk;
 	}
-
-
 	public void setTahunMasuk(String tahunMasuk) {
 		this.tahunMasuk = tahunMasuk;
 	}
-
-
 	public String getTahunLulus() {
 		return tahunLulus;
 	}
-
-
 	public void setTahunLulus(String tahunLulus) {
 		this.tahunLulus = tahunLulus;
 	}
-
-
-	public Person getPerson() {
-		return person;
-	}
-
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-
-
-	
-	
-	/*relasi dengan t_person many to one*/
 }

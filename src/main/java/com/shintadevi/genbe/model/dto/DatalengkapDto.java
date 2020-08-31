@@ -1,18 +1,16 @@
 package com.shintadevi.genbe.model.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-
-public class DataDto {
-
+public class DatalengkapDto {
 	private String nik;
 	private String nama;
 	private String alamat;
 	private String noHp;
 	private Date tanggalLahir;
 	private String tempatLahir;
+	private String umur;
+	private String pendTerakhir;
 	public String getNik() {
 		return nik;
 	}
@@ -37,7 +35,6 @@ public class DataDto {
 	public void setNoHp(String noHp) {
 		this.noHp = noHp;
 	}
-	@JsonFormat(shape=Shape.STRING, pattern = "dd-MMMM-yyyy")
 	public Date getTanggalLahir() {
 		return tanggalLahir;
 	}
@@ -50,5 +47,18 @@ public class DataDto {
 	public void setTempatLahir(String tempatLahir) {
 		this.tempatLahir = tempatLahir;
 	}
+	public String getUmur() {
+		return umur;
+	}
+	public void setUmur(String umur) {
+		this.umur = umur;
+	}
+	public String getPendTerakhir() {
+		return pendTerakhir;
+	}
+	public void setPendTerakhir(String pendTerakhir) {
+		this.pendTerakhir = pendTerakhir;
+	}
 	
+
 }

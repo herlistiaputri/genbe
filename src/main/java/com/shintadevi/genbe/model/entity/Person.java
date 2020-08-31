@@ -2,27 +2,28 @@ package com.shintadevi.genbe.model.entity;
 
 import javax.persistence.*;
 
-
-
 @Entity
 @Table(name = "t_person")
-
 public class Person {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_person")
-	private Integer idPerson;
-	@Column(name="nik" , length = 16, nullable = false, unique = true)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@Column(name = "id_person")
+	private Integer id;
+	@Column(name = "nik", length = 16)
 	private String nik;
-	@Column(name="nama", length = 50)
+	@Column(name = "nama", length = 50)
 	private String nama;
-	@Column(name="alamat")
+	@Column(name = "alamat")
 	private String alamat;
-	public Integer getIdPerson() {
-		return idPerson;
+	
+	@OneToOne(mappedBy = "idPerson")
+	private Biodata biodata;
+	
+	public Integer getId() {
+		return id;
 	}
-	public void setIdPerson(Integer idPerson) {
-		this.idPerson = idPerson;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getNik() {
 		return nik;
@@ -42,10 +43,12 @@ public class Person {
 	public void setAlamat(String alamat) {
 		this.alamat = alamat;
 	}
-	
-//	@OneToOne
-//	@JoinColumn(name = "id_person", nullable = false, unique = true)
-//	private Biodata biodata;
-	
+	public Biodata getBiodata() {
+		return biodata;
+	}
+	public void setBiodata(Biodata biodata) {
+		this.biodata = biodata;
+	}	
 	
 }
+

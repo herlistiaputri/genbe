@@ -9,46 +9,46 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shintadevi.genbe.model.dto.DataDto;
+import com.shintadevi.genbe.model.dto.StatusDto;
 import com.shintadevi.genbe.model.entity.Biodata;
 import com.shintadevi.genbe.model.entity.Person;
 import com.shintadevi.genbe.repository.BiodataRepository;
 import com.shintadevi.genbe.repository.PersonRepository;
 
-@Transactional
 @Service
-public class PersonServiceImpl implements PersonService{
+@Transactional
+public class PersonServiceImpl implements PersonService {
+
 	@Autowired
-	private PersonRepository personRepository;
+	PersonRepository personRepository;
 	@Autowired
-	private BiodataRepository biodataRepository;
+	BiodataRepository biodataRepository;
+//	@Autowired
+//	StatusDto statusDto;
 	
 	@Override
-	//kondisi berfungsi tapi masih ada respon input yg ditampilkan, hanya untuk ke database tidak masuk
-	public Biodata saveBiodataToPerson(Biodata biodata) {
+	public StatusDto insertDataPerson(DataDto dataDto, Biodata biodata, Person person, StatusDto statusDto) {	
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(biodata.getTanggalLahir());
-		if(biodata.getPerson().getNik().length() != 16) {
-
-			return null;}
+		if(dataDto.getNik().length() != 16) {
+			statusDto.setStatus(false);
+			statusDto.setMessage("Jumlah digit nik harus 16");
+			System.out.println("nik salah");
+			return statusDto;
+		}
 		if((Year.now().getValue() - calendar.get(Calendar.YEAR)) < 30) {
-
-			return null;}
-		personRepository.save(biodata.getPerson());
+			statusDto.setStatus(false);
+			statusDto.setMessage("Usia anda belum memenuhi");
+			System.out.println("usia salah");
+			return statusDto;
+		}
+		personRepository.save(person);
+		personRepository.save(biodata.getIdPerson());
 		biodataRepository.save(biodata);
-		return biodata;
+		statusDto.setStatus(true);
+		statusDto.setMessage("Data berhasil disimpan");
+		System.out.println("berhasil");
+		return statusDto;
 	}
-	
-	@Override
-	public Person getDataByNik(String nik) {
-		if(nik.length() != 16) {
-
-			return null;
-		} 
-
-		Person personList = personRepository.ambilDataByNik(nik);
-		return personList;
-	}
-
-	
-	
 }

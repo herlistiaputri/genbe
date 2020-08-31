@@ -15,7 +15,7 @@ public class PendidikanServiceImpl implements PendidikanService{
 	private PendidikanRepository pendidikanRepository;
 
 	@Override
-	public Pendidikan insertDataPendidikan(Pendidikan pendidikan) {
+	public Pendidikan saveDataPendidikan(Pendidikan pendidikan) {
 		Pendidikan entity = pendidikanRepository.save(pendidikan);
 		return pendidikanRepository.save(entity);
 	}
