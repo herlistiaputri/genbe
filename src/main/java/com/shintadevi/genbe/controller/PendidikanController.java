@@ -41,9 +41,7 @@ public class PendidikanController {
 			if(personRepository.findById(idPerson).isPresent()) {
 				Person person = personRepository.findById(idPerson).get();
 				pendidikan.setIdPerson(person);
-				
 			}
-			
 			pendidikanService.saveDataPendidikan(pendidikan);
 			pendList.add(pendidikan);
 		}

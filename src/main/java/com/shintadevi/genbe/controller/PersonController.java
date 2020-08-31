@@ -20,7 +20,7 @@ import com.shintadevi.genbe.model.dto.DatalengkapDto;
 import com.shintadevi.genbe.model.dto.StatusDto;
 import com.shintadevi.genbe.model.dto.StatusdataDto;
 import com.shintadevi.genbe.model.entity.Biodata;
-import com.shintadevi.genbe.model.entity.Person;
+import com.shintadevi.genbe.model.entity.Person; 
 import com.shintadevi.genbe.repository.PersonRepository;
 import com.shintadevi.genbe.service.PersonService;
 
