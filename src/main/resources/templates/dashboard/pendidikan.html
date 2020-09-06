@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+
+<html layout:decorate="~{base}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+ <div class="row mb-2" layout:fragment="content-header">
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Data Pendidikan</h1>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/dashboard" style = "color:navy;">Home</a></li>
+            <li class="breadcrumb-item active">Data Pendidikan</li>
+        </ol>
+    </div>
+</div>
+
+<div class = "container-fluid" layout:fragment = "content-body">
+	<div class = "content">
+	<div class = "row">
+	<div class = "col-md-8">
+		<div class = "container-fluid">
+			<div class = "card">
+				<div class = "card card-secondary">
+					<div class = "card-header bg-navy">
+							<div class = "card-title"> Input Data Pendidikan</div>
+						</div>
+					<div class = "card-body">
+						<form>
+							<fieldset class = "fieldset">
+								<div class = "form-group">
+								<label for = "idPerson"> Id Person : </label>
+								<input type = "text" class = "form-control" id = "idperson" name = "idPerson" placeholder = "Id Person">
+								</div>
+									<div class = "row">
+										<div class = "col-md-6">
+											<div class = "form-group">
+											<label for = "jenjang"> Jenjang Pendidikan : </label>
+											<select class = "form-control" id = "jenjang" name = "jenjang">
+												<option value = "none"> Pilih Jenjang Pendidikan </option>
+												<option value = "SD"> SD </option>
+												<option value = "SMP"> SMP </option>
+												<option value = "SMA/SMK"> SMA/SMK </option>
+												<option value = "D3"> D3 </option>
+												<option value = "D4"> D4 </option>
+												<option value = "S1"> S1 </option>
+												<option value = "S2"> S2 </option>
+											</select>
+											<br>
+											</div>
+											<div class = "form-group">
+												<label for = "tahunmasuk"> Tahun Masuk : </label>
+												<input class = "form-control" type = "text" id = "tahunmasuk" name = "tahunMasuk" placeholder = "Tahun Masuk">	
+												<br>
+												<hr>
+											</div>
+										</div>
+										
+										<div class = "col-md-6">
+											<div class = "form-group">
+												<label for =  "institusi"> Institusi : </label>
+												<input class = "form-control" type = "text" id = "institusi" name = "institusi" placeholder = "Institusi">
+												<br>
+											</div>
+											<div class = "form-group">
+											<label for = "tahunlulus"> Tahun Lulus : </label>
+											<input class = "form-control" type = "text" id = "tahunlulus" name = "tahunLulus" placeholder = "Tahun Lulus">
+											<br>
+											<hr>
+										</div>
+										</div>
+									</div>
+							</fieldset>
+							<button style = "background-color:navy" type = "button" class = "btn btn-secondary addform" id = "add"> Tambah Pendidikan </button>
+							<button style = "background-color:navy" type = "button" class = "btn btn-secondary removeform" id = "remove"> Hapus </button>
+						</form>
+					</div>
+					<div class = "card-footer" align = "right">
+						<button style = "background-color:navy" type = "button" class = "btn btn-secondary submit" id = "submit"> Submit </button>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+		
+	<!-- jQuery -->
+	<script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.1/parsley.min.js"></script> 
+	<!-- DataTables -->
+	<script th:src="@{/assets/plugins/datatables/jquery.dataTables.js}"></script>
+	<script th:src="@{/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+	<!-- SweetAlert2 -->
+	<script th:src="@{/assets/plugins/sweetalert2/sweetalert2.min.js}"></script>
+	<!-- Toastr -->
+	<script th:src="@{/assets/plugins/toastr/toastr.min.js}"></script>
+	<!-- Check Field Kosong -->
+	<script type="text/javascript">
+			$(".submit").click(function() {
+				if($("#idperson").val() == '' || $("#jenjang").val()=='' || $("#institusi").val()=='' || $("#tahunmasuk").val()=='' || $("#tahunlulus").val()=='') {
+				Swal.fire({
+					text : 'Field tidak boleh kosong',
+					confirmButtonText : 'Ok'
+				})
+				} else {
+					Swal.fire({
+						  title: 'Submit the data?',
+						  showCancelButton: true,
+						  confirmButtonText: 'Yes',
+						  cancelButtonText: 'Cancel'
+						}).then((result) => {
+						  if (result.value) {
+						    Swal.fire(
+						      'Submitted'
+						    )
+						  } else if (
+						    /* Read more about handling dismissals below */
+						    result.dismiss === Swal.DismissReason.cancel
+						  ) {
+						    Swal.fire(
+						      'Cancelled'
+						    )
+						  }
+					})
+
+				}
+			});
+
+	</script>
+	<!-- Submit Button -->	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var wrapper = $(".fieldset");
+		var add_button = $("#add");
+		
+		$(add_button).click(function(e){
+			e.preventDefault();
+			$(wrapper).append(
+					'<div class = "row">'+
+					'<div class = "col-md-6">'+
+					'<div class = "form-group">'+'<label for = "jenjang"> Jenjang Pendidikan : </label>'+
+					'<select class = "form-control" id = "jenjang" name = "jenjang">'+
+						'<option value = "none"> Pilih Jenjang Pendidikan </option>'+
+						'<option value = "SD"> SD </option>'+
+						'<option value = "SMP"> SMP </option>'+
+						'<option value = "SMA/SMK"> SMA/SMK </option>'+
+						'<option value = "D3"> D3 </option>'+
+						'<option value = "D4"> D4 </option>'+
+						'<option value = "S1"> S1 </option>'+
+						'<option value = "S2"> S2 </option>'+
+					'</select><br>'+
+					'</div>'+
+					'<div class ="form-group">'+'<label for = "tahunmasuk"> Tahun Masuk : </label>'+
+					'<input class = "form-control" type = "text" id = "tahunmasuk" name = "tahunMasuk" placeholder = "Tahun Masuk"><br></div><hr>'+
+					'</div>'+
+					'<div class = "col-md-6">'+
+					'<div class ="form-group">'+'<label for =  "institusi"> Institusi : </label>'+
+					'<input class = "form-control" type = "text" id = "institusi" name = "institusi" placeholder = "Institusi"><br></div>'+
+					'<div class ="form-group">'+'<label for = "tahunlulus"> Tahun Lulus : </label>'+
+					'<input class = "form-control" type = "text" id = "tahunlulus" name = "tahunLulus" placeholder = "Tahun Lulus"><br></div><hr>'+
+					'</div>'+
+					'</div>'
+			);
+		});
+	});
+	</script>	
+</div>
+
+</html>

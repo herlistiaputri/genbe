@@ -67,6 +67,29 @@
 					"postgresql.dd.plain.string": "false",
 					"postgresql.dd.tag.string": "false"
 				},
+				"auth-model": "native"
+			}
+		},
+		"postgres-jdbc-17447722b1b-270e99247b0fd0bc": {
+			"provider": "postgresql",
+			"driver": "postgres-jdbc",
+			"name": "db_bc_prodemy",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "5432",
+				"database": "db_bc_prodemy",
+				"url": "jdbc:postgresql://localhost:5432/db_bc_prodemy",
+				"home": "postgresql-x64-12",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-non-default-db@": "false",
+					"@dbeaver-show-template-db@": "false",
+					"postgresql.dd.plain.string": "false",
+					"postgresql.dd.tag.string": "false"
+				},
 				"auth-model": "native",
 				"handlers": {}
 			}
