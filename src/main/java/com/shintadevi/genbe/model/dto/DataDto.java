@@ -2,9 +2,6 @@ package com.shintadevi.genbe.model.dto;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-
 public class DataDto {
 
 	private String nik;
@@ -37,7 +34,7 @@ public class DataDto {
 	public void setNoHp(String noHp) {
 		this.noHp = noHp;
 	}
-	@JsonFormat(shape=Shape.STRING, pattern = "dd-MMMM-yyyy")
+	
 	public Date getTanggalLahir() {
 		return tanggalLahir;
 	}

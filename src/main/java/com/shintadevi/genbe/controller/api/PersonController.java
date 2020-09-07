@@ -62,7 +62,7 @@ public class PersonController {
 		return object;
 	}
 	
-	@PostMapping("/save/data/person")
+	@PostMapping("/input")
 	public StatusDto insertDataPerson(@RequestBody DataDto dataDto) {
 		StatusDto statusDto = new StatusDto();
 		Person person = modelmapper.map(dataDto, Person.class);

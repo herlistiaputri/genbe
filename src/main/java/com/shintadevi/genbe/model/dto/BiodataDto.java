@@ -1,11 +1,13 @@
 package com.shintadevi.genbe.model.dto;
 
+import java.sql.Date;
+
 import com.shintadevi.genbe.model.entity.Person;
 
 public class BiodataDto {
 	private Integer id;
 	private String noHp;
-	private String tanggalLahir;
+	private Date tanggalLahir;
 	private String tempatLahir;
 	private Person idPerson;
 	public Integer getId() {
@@ -20,10 +22,10 @@ public class BiodataDto {
 	public void setNoHp(String noHp) {
 		this.noHp = noHp;
 	}
-	public String getTanggalLahir() {
+	public Date getTanggalLahir() {
 		return tanggalLahir;
 	}
-	public void setTanggalLahir(String tanggalLahir) {
+	public void setTanggalLahir(Date tanggalLahir) {
 		this.tanggalLahir = tanggalLahir;
 	}
 	public String getTempatLahir() {

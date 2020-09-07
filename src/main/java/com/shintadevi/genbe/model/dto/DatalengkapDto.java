@@ -1,6 +1,6 @@
 package com.shintadevi.genbe.model.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class DatalengkapDto {
 	private String nik;

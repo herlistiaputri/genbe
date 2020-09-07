@@ -1,7 +1,6 @@
 package com.shintadevi.genbe.model.entity;
 
-
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 @Entity
@@ -24,7 +21,6 @@ public class Biodata {
 	private Integer id;
 	@Column(name = "nohp", length = 16)
 	private String noHp;
-	@Temporal(TemporalType.DATE)
 	@Column(name = "tanggal_lahir")
 	private Date tanggalLahir;
 	@Column(name = "tempat_lahir", length = 50)
