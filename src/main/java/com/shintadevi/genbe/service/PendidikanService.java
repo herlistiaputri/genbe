@@ -1,8 +1,9 @@
 package com.shintadevi.genbe.service;
 
-import com.shintadevi.genbe.model.entity.Pendidikan;
+import java.util.List;
+import com.shintadevi.genbe.model.dto.PendidikanDto;
 
 public interface PendidikanService {
 
-	public Pendidikan saveDataPendidikan(Pendidikan pendidikan);
+	public List<PendidikanDto> savePendidikan(List<PendidikanDto> pendidikanDto, Integer idPerson);
 }

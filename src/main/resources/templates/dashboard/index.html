@@ -1,28 +1,49 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html layout:decorate="~{base}"
+	  xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
- 
+
  <div class="row mb-2" layout:fragment="content-header">
     <div class="col-sm-6">
-        <h1 class="m-0 text-dark">HOME</h1>
+        <h1 class="m-0 text-dark">Data Person</h1>
     </div>
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-            <li class="breadcrumb-item active">FORM BIODATA</li>
+            <li class="breadcrumb-item"><a href="/dashboard" style = "color:navy;">Home</a></li>
+            <li class="breadcrumb-item active">Data Personal</li>
         </ol>
     </div>
-</div>
-      
-<div class = "container-fluid">
-	<div class = "card" layout:fragment = "content-body">
-		<div class = "card card-secondary" >
-			<div class = "card-header">
-				
+</div> 
+
+<div class = "row" layout:fragment="content-body">
+
+	<div class = "col-12">
+		<div class = "card">
+			<div class = "card-header bg-navy" align = "center">
+				<h3><b>Biodata</b></h3>
+			</div>
+
+			<div class = "card-body table-responsive"  >
+				<table class = "table table-striped table-hover nowrap" id = "tableData"
+					style = "width:100%"></table>
+			</div>
+			<div class = "card-body ">
+				<table class = "table table-striped table-hover nowrap" id = "tabelNik"
+					style = "width:100%"></table>
 			</div>
 		</div>
 	</div>
 </div>
 
+<th:block layout:fragment="add-scripts">
+<script th:src="@{/assets/js/tabledata.js}"></script>
+<script>
+dataTabel.create();
+
+$('#cari-nik').click(function () {
+    cariNik.getData($('#nik').val());
+})
+</script>
+</th:block>
 </html>

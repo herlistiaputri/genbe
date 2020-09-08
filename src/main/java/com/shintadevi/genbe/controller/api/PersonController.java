@@ -5,6 +5,7 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class PersonController {
 	@Autowired
 	private PersonRepository personRepository;
 
-	@GetMapping("/data/person/{nik}")
+	@GetMapping("/data/{nik}")
 	public List<Object> getDataPerson(@PathVariable String nik) {
 		List<Object> object = new ArrayList<>();
 		StatusDto status = new StatusDto();
@@ -62,7 +63,44 @@ public class PersonController {
 		return object;
 	}
 	
-	@PostMapping("/input")
+	@GetMapping("/data")
+	public List<DatalengkapDto> getDataLengkap(){
+		List<Person> personList = personRepository.findAll();
+		List<DatalengkapDto> dataDto = personList.stream()
+							.map(person -> mapDataToDatalengkapDto(person))
+							.collect(Collectors.toList());
+		return dataDto;
+	}
+	
+	
+	private DatalengkapDto mapDataToDatalengkapDto(Person person) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(person.getBiodata().getTanggalLahir());
+		Integer umur = 	Year.now().getValue() - calendar.get(Calendar.YEAR);
+		DatalengkapDto dataDto = modelmapper.map(person, DatalengkapDto.class);
+		modelmapper.map(person.getBiodata(), dataDto);
+		dataDto.setUmur(Integer.toString(umur));
+		dataDto.setPendTerakhir(personRepository.getJenjangPend(person.getId()));
+		
+		return dataDto;
+	}
+
+	@GetMapping
+	public List<DataDto> getData() {
+		List<Person> personList = personRepository.findAll();
+		List<DataDto> dataDto = personList.stream()
+									.map(person -> mapDataToDataDto(person))
+									.collect(Collectors.toList());
+		return dataDto;
+	}
+	
+	private DataDto mapDataToDataDto(Person person) {
+		DataDto dataDto = modelmapper.map(person, DataDto.class);
+		modelmapper.map(person.getBiodata(), dataDto);
+		return dataDto;
+	}
+	
+	@PostMapping
 	public StatusDto insertDataPerson(@RequestBody DataDto dataDto) {
 		StatusDto statusDto = new StatusDto();
 		Person person = modelmapper.map(dataDto, Person.class);

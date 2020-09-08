@@ -1,3 +1,55 @@
+var tableData = {
+	create: function() {
+		if($.fn.DataTable.isDataTable('#tableData')) {
+			$('#tableData').DataTable().clear();
+			$('#tableData').DataTable().destroy();
+		}
+		
+		$.ajax({
+			url: '/person',
+			method:'get',
+			contentType: 'application/json',
+			success: function (res, status, xhr) {
+				if(xhr.status == 200 || xhr.status == 201){
+					$('#tableData').DataTable({
+						data: res,
+						columns: [
+							{
+								title : "NIK",
+								data : "nik"
+							},
+							{
+								title : "Nama",
+								data : "nama"
+							},
+							{
+								title : "Alamat",
+								data : "alamat"
+							},
+							{
+								title : "Tempat Lahir",
+								data : "tempatLahir"
+							},
+							{
+								title : "Tanggal Lahir",
+								data : "tanggalLahir"
+							},
+							{
+								title : "No Hp",
+								data : "noHp"
+							}
+						]
+					});
+				} else {
+				}
+			},
+			error : function (err) {
+				console.log(err);
+			}
+		});
+	}
+};
+
 var formBiodata = {
 	resetForm: function() {
 		$('#form-biodata')[0].reset();
@@ -46,9 +98,10 @@ var formBiodata = {
 					  icon: 'warning',
 					  title: ' Usia Anda Belum Memenuhi ' 
 					})
-				}else{
+				} else {
+				
 				$.ajax({
-				url: '/person/input',
+				url: '/person',
 				method: 'post',
 				contentType: 'application/json',
 				dataType: 'json',
@@ -56,6 +109,22 @@ var formBiodata = {
 				success: function (res, status, xhr){
 					if(xhr.status == 200 || xhr.status == 201) {
 						$('#modal-biodata').modal('hide')
+						const Toast = Swal.mixin({
+					  toast: true,
+					  position: 'top-end',
+					  showConfirmButton: false,
+					  timer: 3000,
+					  timerProgressBar: true,
+					  onOpen: (toast) => {
+					    toast.addEventListener('mouseenter', Swal.stopTimer)
+					    toast.addEventListener('mouseleave', Swal.resumeTimer)
+					  }
+					})
+					
+					Toast.fire({
+					  icon: 'success',
+					  title: ' Sukses ' 
+					})
 					} else {
 					}
 				},

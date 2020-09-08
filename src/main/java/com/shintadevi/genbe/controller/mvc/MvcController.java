@@ -12,11 +12,11 @@ public class MvcController {
 	public String getIndex() {
 		return "dashboard/index";
 	}
-	@GetMapping("person")
+	@GetMapping("input/person")
 	public String getPerson() {
 		return "dashboard/person";
 	}
-	@GetMapping("pendidikan")
+	@GetMapping("input/pendidikan")
 	public String getPendidikan() {
 		return "dashboard/pendidikan";
 	}
