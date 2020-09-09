@@ -72,6 +72,19 @@ public class PersonController {
 		return dataDto;
 	}
 	
+	@GetMapping("/{id}")
+	public DataDto getBiodata(@PathVariable (value = "id_person") Integer id) {
+		Person person = personRepository.findById(id).get();
+		DataDto dataDto = new DataDto();
+		dataDto.setId(person.getId());
+		dataDto.setNik(person.getNik());
+		dataDto.setNama(person.getNama());
+		dataDto.setAlamat(person.getAlamat());
+		dataDto.setTempatLahir(person.getBiodata().getTempatLahir());
+		dataDto.setTanggalLahir(person.getBiodata().getTanggalLahir());
+		dataDto.setNoHp(person.getBiodata().getNoHp());
+		return dataDto;
+	}
 	
 	private DatalengkapDto mapDataToDatalengkapDto(Person person) {
 		Calendar calendar = Calendar.getInstance();

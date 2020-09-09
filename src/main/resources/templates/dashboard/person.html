@@ -90,7 +90,6 @@
 	
 <th:block layout:fragment="add-scripts">
 <script th:src="@{/assets/js/person.js}"></script>
-
 <script>
 tableData.create();
 
@@ -100,7 +99,8 @@ $('#btn-tambah-biodata').click(function () {
 });
 
 $('#btn-save-biodata').click(function () {
-    formBiodata.saveForm()
+    formBiodata.saveForm();
+    
 })
 </script>
 </th:block>

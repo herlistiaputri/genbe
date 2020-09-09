@@ -3,13 +3,21 @@ package com.shintadevi.genbe.model.dto;
 import java.sql.Date;
 
 public class DataDto {
-
+	private Integer id;
 	private String nik;
 	private String nama;
 	private String alamat;
 	private String noHp;
 	private Date tanggalLahir;
 	private String tempatLahir;
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getNik() {
 		return nik;
 	}

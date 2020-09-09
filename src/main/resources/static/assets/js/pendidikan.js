@@ -16,6 +16,22 @@ var formPend = {
 		success: function (res,status,xhr){
 			if(xhr.status == 200 || xhr.status == 201) {
 				$('#modal-pend').modal('hide')
+				const Toast = Swal.mixin({
+				  toast: true,
+				  position: 'top-end',
+				  showConfirmButton: false,
+				  timer: 3000,
+				  timerProgressBar: true,
+				  onOpen: (toast) => {
+						    toast.addEventListener('mouseenter', Swal.stopTimer)
+					    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+							}
+					})
+					
+				Toast.fire({
+				  icon: 'success',
+				  title: ' Sukses ' 
+				})
 			} else {
 			}
 		},

@@ -37,7 +37,14 @@ var tableData = {
 							{
 								title : "No Hp",
 								data : "noHp"
-							}
+							},
+							{
+                                title: "Action",
+                                data: null,
+                                render: function (data, type, row) {
+                                    return "<button class='btn-primary' onclick=formBiodata.setEditData('" + data.id + "')>Edit</button>"
+                                }
+                            }
 						]
 					});
 				} else {
@@ -110,12 +117,12 @@ var formBiodata = {
 					if(xhr.status == 200 || xhr.status == 201) {
 						$('#modal-biodata').modal('hide')
 						const Toast = Swal.mixin({
-					  toast: true,
-					  position: 'top-end',
-					  showConfirmButton: false,
-					  timer: 3000,
-					  timerProgressBar: true,
-					  onOpen: (toast) => {
+						  toast: true,
+						  position: 'top-end',
+						  showConfirmButton: false,
+						  timer: 3000,
+						  timerProgressBar: true,
+						  onOpen: (toast) => {
 					    toast.addEventListener('mouseenter', Swal.stopTimer)
 					    toast.addEventListener('mouseleave', Swal.resumeTimer)
 					  }
@@ -135,5 +142,29 @@ var formBiodata = {
 		}
 		}
 		}
-	}
+	},
+	setEditData: function (idperson) {
+        formBiodata.resetForm();
+
+        $.ajax({
+            url: '/person/' + idperson,
+            method: 'get',
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (res, status, xhr) {
+                if (xhr.status == 200 || xhr.status == 201) {
+                    $('#form-biodata').fromJSON(JSON.stringify(res));
+                    $('#modal-biodata').modal('show')
+
+                } else {
+
+                }
+            },
+            erorrr: function (err) {
+                console.log(err);
+            }
+        });
+
+
+    }
 };
