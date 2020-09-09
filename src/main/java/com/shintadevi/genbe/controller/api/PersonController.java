@@ -63,6 +63,7 @@ public class PersonController {
 		return object;
 	}
 	
+	//Get for all data + umur and pend terakhir
 	@GetMapping("/data")
 	public List<DatalengkapDto> getDataLengkap(){
 		List<Person> personList = personRepository.findAll();
@@ -72,8 +73,20 @@ public class PersonController {
 		return dataDto;
 	}
 	
-	@GetMapping("/{id}")
-	public DataDto getBiodata(@PathVariable (value = "id_person") Integer id) {
+	private DatalengkapDto mapDataToDatalengkapDto(Person person) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(person.getBiodata().getTanggalLahir());
+		Integer umur = 	Year.now().getValue() - calendar.get(Calendar.YEAR);
+		DatalengkapDto dataDto = modelmapper.map(person, DatalengkapDto.class);
+		modelmapper.map(person.getBiodata(), dataDto);
+		dataDto.setUmur(Integer.toString(umur));
+		dataDto.setPendTerakhir(personRepository.getJenjangPend(person.getId()));
+		return dataDto;
+	}
+
+	//Get for edit data per id person
+	@GetMapping("/{idperson}")
+	public DataDto getBiodata(@PathVariable (value = "idperson") Integer id) {
 		Person person = personRepository.findById(id).get();
 		DataDto dataDto = new DataDto();
 		dataDto.setId(person.getId());
@@ -86,18 +99,7 @@ public class PersonController {
 		return dataDto;
 	}
 	
-	private DatalengkapDto mapDataToDatalengkapDto(Person person) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(person.getBiodata().getTanggalLahir());
-		Integer umur = 	Year.now().getValue() - calendar.get(Calendar.YEAR);
-		DatalengkapDto dataDto = modelmapper.map(person, DatalengkapDto.class);
-		modelmapper.map(person.getBiodata(), dataDto);
-		dataDto.setUmur(Integer.toString(umur));
-		dataDto.setPendTerakhir(personRepository.getJenjangPend(person.getId()));
-		
-		return dataDto;
-	}
-
+	//Get data person after input
 	@GetMapping
 	public List<DataDto> getData() {
 		List<Person> personList = personRepository.findAll();
@@ -110,6 +112,7 @@ public class PersonController {
 	private DataDto mapDataToDataDto(Person person) {
 		DataDto dataDto = modelmapper.map(person, DataDto.class);
 		modelmapper.map(person.getBiodata(), dataDto);
+		dataDto.setId(person.getId());
 		return dataDto;
 	}
 	

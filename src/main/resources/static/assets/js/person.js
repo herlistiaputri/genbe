@@ -42,8 +42,11 @@ var tableData = {
                                 title: "Action",
                                 data: null,
                                 render: function (data, type, row) {
+                                	 console.log(res);
                                     return "<button class='btn-primary' onclick=formBiodata.setEditData('" + data.id + "')>Edit</button>"
+                               		
                                 }
+                               
                             }
 						]
 					});
@@ -115,6 +118,7 @@ var formBiodata = {
 				data: JSON.stringify(dataResult),
 				success: function (res, status, xhr){
 					if(xhr.status == 200 || xhr.status == 201) {
+						tableData.create();
 						$('#modal-biodata').modal('hide')
 						const Toast = Swal.mixin({
 						  toast: true,
@@ -160,7 +164,7 @@ var formBiodata = {
 
                 }
             },
-            erorrr: function (err) {
+            error: function (err) {
                 console.log(err);
             }
         });

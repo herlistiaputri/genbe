@@ -3,6 +3,7 @@ package com.shintadevi.genbe.model.dto;
 import java.sql.Date;
 
 public class DatalengkapDto {
+	private Integer id;
 	private String nik;
 	private String nama;
 	private String alamat;
@@ -11,6 +12,14 @@ public class DatalengkapDto {
 	private String tempatLahir;
 	private String umur;
 	private String pendTerakhir;
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getNik() {
 		return nik;
 	}

@@ -11,7 +11,7 @@ public class Person {
 	private Integer id;
 	@Column(name = "nik", length = 16)
 	private String nik;
-	@Column(name = "nama", length = 50)
+	@Column(name = "nama", length = 50, unique = true)
 	private String nama;
 	@Column(name = "alamat")
 	private String alamat;
