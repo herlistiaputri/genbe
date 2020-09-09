@@ -1,3 +1,51 @@
+var tableData = {
+	create: function() {
+		if($.fn.DataTable.isDataTable('#tableData')) {
+			$('#tableData').DataTable().clear();
+			$('#tableData').DataTable().destroy();
+		}
+		
+		$.ajax({
+			url: '/pendidikan',
+			method:'get',
+			contentType: 'application/json',
+			success: function (res, status, xhr) {
+				if(xhr.status == 200 || xhr.status == 201){
+					$('#tableData').DataTable({
+						data: res,
+						columns: [
+							{
+								title : "Id Person",
+								data : "idperson"
+							},
+							{
+								title : "Jenjang",
+								data : "jenjang"
+							},
+							{
+								title : "Institusi",
+								data : "institusi"
+							},
+							{
+								title : "Tahun Masuk",
+								data : "tahunMasuk"
+							},
+							{
+								title : "Tahun Lulus",
+								data : "tahunLulus"
+							}
+						]
+					});
+				} else {
+				}
+			},
+			error : function (err) {
+				console.log(err);
+			}
+		});
+	}
+};
+
 var formPend = {
 	resetForm: function() {
 		$('#form-pend')[0].reset();
@@ -15,6 +63,7 @@ var formPend = {
 		data: JSON.stringify(arr),
 		success: function (res,status,xhr){
 			if(xhr.status == 200 || xhr.status == 201) {
+				tableData.create();
 				$('#modal-pend').modal('hide')
 				const Toast = Swal.mixin({
 				  toast: true,

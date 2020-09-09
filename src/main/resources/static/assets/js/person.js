@@ -63,6 +63,8 @@ var tableData = {
 var formBiodata = {
 	resetForm: function() {
 		$('#form-biodata')[0].reset();
+		$('#id').val('');
+		$('#form-biodata').parsley().reset();
 	},
 	saveForm: function() {
 		if($('#form-biodata').parsley().validate()) {
@@ -119,7 +121,8 @@ var formBiodata = {
 				success: function (res, status, xhr){
 					if(xhr.status == 200 || xhr.status == 201) {
 						tableData.create();
-						$('#modal-biodata').modal('hide')
+						$('#modal-biodata').modal('hide');
+						formBiodata.resetForm();
 						const Toast = Swal.mixin({
 						  toast: true,
 						  position: 'top-end',

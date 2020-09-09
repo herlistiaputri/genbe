@@ -22,12 +22,25 @@
 		<div class = "card">
 			<div class = "card-header bg-navy">
 				<h3 class = "card-title">Pendidikan</h3>
-				<button class = "float-right btn btn-secondary" id = "btn-tambah-biodata"> Tambah </button>
 			</div>
 			<div class = "card-body table-responsive">
-				<table class = "table table-striped table-hover nowrap" id = "tableData"
-					style = "width:100%"></table>
+				<div class = "form-group">
+					<label>Id Person : </label>
+					<div class = "row">
+					<div class = "col-md-8">
+					<input class = "form-control" id = "idperson" name = "idperson" placeholder="Masukkan ID" required type = "text">					</div>
+					<div class = "col-md-4" align = "right">
+					<button class = "float-right btn btn-primary" id = "btn-tambah-biodata"> Tambah </button>
+					</div>
+					</div>	
+				</div>
+					<table class = "table table-striped table-hover nowrap" id = "tableData" style = "width:100%"></table>
+				<div align="right">
+		            <button type="button" class="btn btn-danger" id="delete"> Delete</button>
+		            <button type="button" class="btn btn-secondary" id="saveAll" data-toggle="modal" data-target="#modal2">Save All</button>
+          		</div>
 			</div>
+			
 		</div>
 	</div>
 	
@@ -44,11 +57,8 @@
 					<div class = "card-header">
 					</div>
 					<form id = "form-pend" role="form">
-						<input name = "id" type = "hidden"/>
-						<div class = "form-group">
-							<label>Id Person : </label>
-							<input class = "form-control" id = "idperson" name = "idperson" placeholder = "Id Person" required type = "text">
-						</div>
+						<input name = "id" id = "id" type = "hidden"/>
+						<input name = "idPerson" id = "idPerson" type = "hidden"/>
 						<div class = "form-group">
 							<label for = "jenjang"> Jenjang Pendidikan : </label>
 							<select class = "form-control" id = "jenjang" name = "jenjang">
@@ -60,6 +70,7 @@
 								<option value = "D4"> D4 </option>
 								<option value = "S1"> S1 </option>
 								<option value = "S2"> S2 </option>
+								<option value = "S2"> S3 </option>
 							</select>
 						</div>
 						<div class = "form-group">
@@ -87,9 +98,10 @@
 	
 	
 <th:block layout:fragment="add-scripts">
-<script th:src="@{/assets/js/pendidikan.js}"></script>
+<script th:src="@{/assets/js/pendidikanarr.js}"></script>
 
 <script>
+
 
 $('#btn-tambah-biodata').click(function () {
     formPend.resetForm();
@@ -97,8 +109,20 @@ $('#btn-tambah-biodata').click(function () {
 });
 
 $('#btn-save-biodata').click(function () {
-    formPend.saveForm()
+    formPend.addPend();
 })
+
+$('#saveAll').click(function(){
+    formPend.saveData();
+    $('input[name=idPerson]').val(' ');
+    var input=[];
+});
+$("#delete").click(function(){
+	$('#tableData').DataTable().clear();
+	$('#tableData').DataTable().destroy();
+	$('input[name=idPerson]').val(' ');
+	formPend.resetForm();
+});
 </script>
 </th:block>
 	

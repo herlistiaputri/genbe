@@ -44,7 +44,7 @@
 					<div class = "card-header">
 					</div>
 					<form id = "form-biodata" role="form">
-						<input name = "id" type = "hidden"/>
+						<input name = "id" id="id" type = "hidden"/>
 						<div class = "form-group">
 							<label>Nik : </label>
 							<input class = "form-control" id = "nik" name = "nik" placeholder = "NIK" required type = "text">
@@ -100,7 +100,6 @@ $('#btn-tambah-biodata').click(function () {
 
 $('#btn-save-biodata').click(function () {
     formBiodata.saveForm();
-    
 })
 </script>
 </th:block>
