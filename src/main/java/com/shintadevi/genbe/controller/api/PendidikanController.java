@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,15 @@ public class PendidikanController {
 		return pendDto;
 	}
 	
+	@GetMapping("/{idPerson}")
+	public List<PendidikanDto> getPendidikanById(@PathVariable Integer idPerson){
+		List<Pendidikan> pendList = pendidikanRepository.findAllByIdPerson(idPerson);
+		List<PendidikanDto> pendDto = pendList.stream()
+				.map(pendidikan -> mapPendToDto(pendidikan))
+				.collect(Collectors.toList());
+		return pendDto;
+	}
+	
 	@PostMapping
 	public StatusDto insertDataPend(@RequestParam (value = "idperson") Integer idPerson, 
 			@RequestBody List<PendidikanDto> pendidikanDto) {
@@ -62,5 +72,4 @@ public class PendidikanController {
 			return statusDto;
 		}
 	}
-	
 }

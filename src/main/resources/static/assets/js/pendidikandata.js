@@ -34,7 +34,16 @@ var formPend = {
 				{
 					title : "Tahun Lulus",
 					data : "tahunLulus"
-				}
+				},
+				{
+                    title: "Action",
+                    data: null,
+                	render: function (data, type, row) {
+                     	 console.log(array);
+                         return "<button type='button' class='btn-sm btn-danger' onclick=formPend.deleteData('" + data.id + "')> Delete Data</button>"    		
+                     }
+                               
+                 }
 				]
 			});
 			$('#modal-pend').modal('hide');
@@ -92,5 +101,56 @@ var formPend = {
 			console.log(err);
 		}
 		});
+	},	
+	deleteData: function() {
+		$('#tableData').DataTable().clear();
+		$('#tableData').DataTable().destroy();
+		$('input[name=idPerson]').val(' ');
+		formPend.resetForm();
+	},
+	showData: function(){
+		if($.fn.DataTable.isDataTable('#tablePend')) {
+			$('#tablePend').DataTable().clear();
+			$('#tablePend').DataTable().destroy();
+			$.ajax({
+				url: '/pendidikan',
+				method:'get',
+				contentType: 'application/json',
+				success: function (res, status, xhr) {
+					if(xhr.status == 200 || xhr.status == 201){
+						$('#tablePend').DataTable({
+							data:res,
+							columns: [
+								{
+									title : "Jenjang",
+									data : "jenjang"
+								},
+								{
+									title : "Institusi",
+									data : "institusi"
+								},
+								{
+									title : "Tahun Masuk",
+									data : "tahunMasuk"
+								},
+								{
+									title : "Tahun Lulus",
+									data : "tahunLulus"
+								},
+								{
+				                    title: "Action",
+				                    data: null,
+				                	render: function (data, type, row) {
+				                     	 console.log(res);
+				                         return "<button type='button' class='btn-sm btn-danger' onclick=formPend.deleteData('" + data.id + "')> Delete Data</button>"    		
+				                     }
+				                               
+				                 }
+							]
+						});
+					}
+				} 
+			})
+		}
 	}
 }

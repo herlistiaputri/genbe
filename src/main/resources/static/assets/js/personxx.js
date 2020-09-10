@@ -47,16 +47,7 @@ var tableData = {
                                		
                                 }
                                
-                            },
-                            {
-			                    title: "Tambah Pendidikan",
-			                    data: null,
-			                	render: function (data, type, row) {
-			                     	 console.log(res);
-			                         return '<a href = "/input/pendidikan/'+row.id+'" > Tambah Pendidikan </a>'    		
-			                     }
-			                               
-			                 }
+                            }
 						]
 					});
 				} else {
@@ -153,22 +144,6 @@ var formBiodata = {
 				},
 				error: function(err) {
 					console.log(err);
-					const Toast = Swal.mixin({
-						  toast: true,
-						  position: 'top-end',
-						  showConfirmButton: false,
-						  timer: 3000,
-						  timerProgressBar: true,
-						  onOpen: (toast) => {
-					    toast.addEventListener('mouseenter', Swal.stopTimer)
-					    toast.addEventListener('mouseleave', Swal.resumeTimer)
-					  }
-					})
-					
-					Toast.fire({
-					  icon: 'danger',
-					  title: ' NIK sudah terdaftar ' 
-					})
 				}
 			});
 		}

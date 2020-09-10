@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html layout:decorate="~{base}"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div class="row mb-2" layout:fragment="content-header">
+    <div class="col-sm-6">
+        <h1 class="m-0 text-dark"><b>Data Pendidikan</b></h1>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/dashboard" style = "color:navy;">Home</a></li>
+            <li class="breadcrumb-item active">Data Pendidikan</li>
+        </ol>
+    </div>
+</div> 
+<div class = "row" layout:fragment="content-body">
+		<div class = "col-12">
+		<div class = "card">
+			<div class = "card-header bg-navy" align = "center">
+				<div class = "card-title"><h4><b>Biodata</b></h4></div>
+			</div>
+			<div class = "form-group">
+				<label>Id Person : </label>
+				<input class = "form-control" id = "idperson" required type = "text">
+			</div>
+			<div class = "card-body table-responsive">
+				<table class = "table table-striped table-hover nowrap" id = "tabel-pendidikan"
+					style = "width:100%"></table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block>
+<script>
+var tabelPend = {
+	create: function() {
+		if($.fn.DataTable.isDataTable('#tabel-pendidikan')) {
+			$('#tabel-pendidikan').DataTable().clear();
+			$('#tabel-pendidikan').DataTable().destroy();
+		}
+		$.ajax({
+			url: '/pendidikan/' + idperson,
+			method:'get',
+			contentType: 'application/json',
+			success: function (res, status, xhr) {
+				if(xhr.status == 200 || xhr.status == 201){
+					$('#tableData').DataTable({
+						data: res,
+						columns: [
+
+							{
+								title : "Jenjang",
+								data : "jenjang"
+							},
+							{
+								title : "Institusi",
+								data : "institusi"
+							},
+							{
+								title : "Tahun Masuk",
+								data : "tahunMasuk"
+							},
+							{
+								title : "Tahun Lulus",
+								data : "tahunLulus"
+							}
+						]
+					});
+				} else {
+				}
+			},
+			error : function (err) {
+				console.log(err);
+			}
+		});
+	}
+	
+};
+
+tabelPend.create();
+</script>
+</th:block>
+
+</html>
